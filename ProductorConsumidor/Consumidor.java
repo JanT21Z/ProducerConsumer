@@ -32,7 +32,7 @@ public class Consumidor extends Thread {
 
     private void printResults(){
         for (int i = 0; i < count.length; i++) {
-            System.out.println("Números entre" + (i * 10 + 1) + "y" + (i * 10 + 10) + " = " + count[i]);
+            System.out.println("Números entre " + (i * 10 + 1) + " y " + (i * 10 + 10) + " = " + count[i]);
         }
     }
 }
