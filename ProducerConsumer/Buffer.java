@@ -1,36 +1,23 @@
 package ProducerConsumer;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Buffer {
-    private Queue<Integer> buffer;
-
-    private int tamanio;
+    private BlockingQueue<Integer> queue;
 
     public Buffer(int tamanio) {
-
-        this.tamanio = tamanio;
-        buffer = new LinkedList<>();
+        this.queue = new LinkedBlockingQueue<>(tamanio);
     }
 
-    public synchronized void producir(int item) throws InterruptedException{
-        while (buffer.size() == tamanio){
-            wait();
-        }
-        buffer.add(item);
-         System.out.println("Producido: " + item);
-         notifyAll();
+    public void producir(int item) throws InterruptedException {
+        queue.put(item);
+        System.out.println("Producido: " + item);
     }
 
-    public synchronized int consumidor() throws InterruptedException{
-        while (buffer.isEmpty()){
-            wait();
-        }
-        int item = buffer.poll();
+    public int consumidor() throws InterruptedException {
+        int item = queue.take();
         System.out.println("Consumido: " + item);
-        notifyAll();
         return item;
     }
 }

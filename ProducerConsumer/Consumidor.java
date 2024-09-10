@@ -13,9 +13,9 @@ public class Consumidor implements Runnable {
         for(int i = 0; i < 100; i++)
             try {
                 buffer.consumidor();
-                Thread.sleep(100);
-            } catch (InterruptedException ie) {
-                ie.printStackTrace();
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
     }
 }
